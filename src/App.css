@@ -51,3 +51,6 @@
   }
 }
 
+.spinner-overlay {
+  z-index: 3;
+}

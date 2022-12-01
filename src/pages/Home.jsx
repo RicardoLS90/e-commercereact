@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import '../styles/home.css'
+import Card from 'react-bootstrap/Card';
 
 const Home = () => {
 
@@ -39,41 +40,53 @@ const Home = () => {
               {category.name}</Button>
           ))}
         </div>
-       
+
       </div>
       <div className='productsList-container'>
-      <div className='input-container'>
-        <InputGroup className="mb-3">
-          <Form.Control
-            placeholder="Search Product"
-            aria-label="Recipient's username"
-            aria-describedby="basic-addon2"
-            value={inputSearch}
-            onChange={e => setInputSearch(e.target.value)}
-          />
-          <Button
-            onClick={() => dispatch(inputFilterThunk(inputSearch))}
-            variant="outline-secondary" id="button-addon2">
-            search
-          </Button>
-        </InputGroup>
+        <div className='input-container'>
+          <InputGroup className="mb-3">
+            <Form.Control
+              placeholder="Search Product"
+              aria-label="Recipient's username"
+              aria-describedby="basic-addon2"
+              value={inputSearch}
+              onChange={e => setInputSearch(e.target.value)}
+            />
+            <Button
+              onClick={() => dispatch(inputFilterThunk(inputSearch))}
+              variant="outline-secondary" id="button-addon2">
+              search
+            </Button>
+          </InputGroup>
         </div>
         <div className='productlist-title'>
-      <h1>Products</h1>
-      </div>
-      <div className='productsList-detail'>
-      {products.map(product => (
-        <li className='product-list' key={product.id}>
-          <Link className='product-detail' to={`/products/${product.id}`} >
-            <p className='product-name'>{product.title}</p>
-            <img className='img-product' src={product.productImgs[0]} alt="" />
-          </Link>
-        </li>
-      ))}
-      </div>
+          <h1>Products</h1>
+        </div>
+        <div className='productsList-detail'>
+          {products.map(product => (
+            <li className='product-list' key={product.id}>
+              <Link className='link-home' to={`/products/${product.id}`}>
+              <Card className='img-container' style={{ width: '18rem' }}>
+                <Card.Img className='img-product' variant="top" src={product.productImgs[0]}  />
+                <Card.Body>
+                  <Card.Title>{product.title}</Card.Title>
+                  <Card.Text>
+                  Price
+                  {product.price}
+                  </Card.Text>
+                  <Link className='link-home' to={`/products/${product.id}`}>
+                  <Button variant="primary">Details</Button>
+                  </Link>
+                </Card.Body>
+              </Card>
+              </Link>
+
+            </li>
+          ))}
+        </div>
       </div>
     </div>
-  
+
   );
 };
 
